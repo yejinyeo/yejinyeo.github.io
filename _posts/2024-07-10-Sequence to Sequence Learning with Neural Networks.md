@@ -3,6 +3,8 @@ layout: single
 title:  "[paper review] Sequence to Sequence Learning with Neural Networks"
 ---
 
+# **Sequence to Sequence Learning with Neural Networks**
+
 ## **background**
 ### **1. RNN(Recurrent Neural Network)**
 - sequence data(텍스트 데이터, 시계열 데이터) 처리에 적합한 모델
