@@ -1,4 +1,7 @@
-# **Sequence to Sequence Learning with Neural Networks**
+---
+layout: single
+title:  "[paper review] Sequence to Sequence Learning with Neural Networks"
+---
 
 ## **background**
 ### **1. RNN(Recurrent Neural Network)**
