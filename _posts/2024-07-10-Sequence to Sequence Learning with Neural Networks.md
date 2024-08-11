@@ -1,9 +1,10 @@
 ---
 layout: single
-title:  "[paper review] Sequence to Sequence Learning with Neural Networks"
+title:  "[Paper Review] Sequence to Sequence Learning with Neural Networks"
+categories: 
+  - Paper-Review
+  - NLP
 ---
-
-# **Sequence to Sequence Learning with Neural Networks**
 
 ## **background**
 ### **1. RNN(Recurrent Neural Network)**
@@ -194,7 +195,7 @@ LSTM과 같은 RNN을 기반으로 하여 입력 시퀀스를 고정된 차원�
 3. **input sequence 역순 처리**
    - 단기 의존성을 증가시켜 최적화를 용이하게 함.
    - 긴 문장에서 성능을 향상시킴.  
-     -> **why?** 긴 문장에서 중요한 정보는 시퀀스의 초반부에 위치하는 경우가 많음. 그러므로 역순 처리를 하면 초반부에 위치한 중요한 정보가 인코더의 마지막 부분에서 처리되고, 디코더의 초기 상태에 더 가까워져 디코더가 이를 더 잘 활용할 수 있음.
+     -> **how?** 긴 문장에서 중요한 정보는 시퀀스의 초반부에 위치하는 경우가 많음. 그러므로 역순 처리를 하면 초반부에 위치한 중요한 정보가 인코더의 마지막 부분에서 처리되고, 디코더의 초기 상태에 더 가까워져 디코더가 이를 더 잘 활용할 수 있음.
 4. **의미 표현 학습**
    - 의역(paraphrasing)에 집중함. (문장의 형태보다는 **의미**)  
      -> 번역 작업에서 원문과 번역문은 유사한 의미를 가지고 있지만, 단어와 구문의 구조는 다를 수 있음.

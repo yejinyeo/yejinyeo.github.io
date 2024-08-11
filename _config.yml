@@ -21,7 +21,7 @@ title                    : "Yejinnim’s AI happy lab"
 title_separator          : "|"
 subtitle                 : "From Steps to Leaps: Documenting My AI Learning"
 name                     : "Yejin Yeo"
-description              : "AI를 배우며 마주한 도전과 성장을 기록하는 블로그입니다. 공부, 프로젝트, 연구를 통해 배운 지식과 경험을 공유합니다."
+description              : "yejin's study blog"
 url                      : "https://yejinyeo.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "yejinyeo/blog-comments" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -116,7 +116,7 @@ analytics:
 author:
   name             : "Yejin Yeo"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "AI 관련 공부, 프로젝트, 연구를 통해 배운 지식과 경험을 기록하는 블로그입니다."
+  bio              : "하나하나 해나가는 말하는 🥔 ai 연구자 (Interested In Multi-modal)"
   location         : "Incheon, South Korea"
   email            : 
   links:
@@ -129,9 +129,9 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/yejinyeo"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/yenijnim"
+    # - label: "Instagram"
+    #   icon: "fab fa-fw fa-instagram"
+    #   url: "https://instagram.com/yenijnim"
 
 # Site Footer
 footer:
@@ -139,9 +139,9 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/yejinyeo"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/yenijnim"
+    # - label: "Instagram"
+    #   icon: "fab fa-fw fa-instagram"
+    #   url: "https://instagram.com/yenijnim"
 
 
 # Reading Files
@@ -273,16 +273,16 @@ tag_archive:
   type: liquid
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
-#   layouts:
-#     category: archive-taxonomy
-#     tag: archive-taxonomy
-#   permalinks:
-#     category: /categories/:name/
-#     tag: /tags/:name/
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: archive-taxonomy
+    tag: archive-taxonomy
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
 
 
 # HTML Compression

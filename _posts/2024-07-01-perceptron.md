@@ -1,3 +1,9 @@
+---
+layout: single
+title:  "Perceptron"
+categories: Deep-Learning
+---
+
 # **1. Perceptron**
 *여기서 기술하는 퍼셉트론은 단순 퍼셉트론임*
 
