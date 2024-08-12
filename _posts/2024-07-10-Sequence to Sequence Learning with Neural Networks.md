@@ -6,6 +6,7 @@ categories:
   - NLP
 tag: 
   - seq2seq
+use_math: true
 ---
 
 ## **background**

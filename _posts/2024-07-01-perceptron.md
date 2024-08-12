@@ -2,6 +2,7 @@
 layout: single
 title:  "Perceptron"
 categories: Deep-Learning
+use_math: true
 ---
 
 # **1. Perceptron**
