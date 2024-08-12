@@ -1,5 +1,4 @@
 ---
-layout: single
 title:  "[Paper Review] Sequence to Sequence Learning with Neural Networks"
 categories: 
   - Paper-Review
