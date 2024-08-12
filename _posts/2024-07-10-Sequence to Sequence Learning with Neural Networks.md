@@ -6,7 +6,6 @@ categories:
   - NLP
 tag: 
   - seq2seq
-toc: true
 ---
 
 ## **background**

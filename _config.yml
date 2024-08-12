@@ -115,7 +115,7 @@ analytics:
 # Site Author
 author:
   name             : "Yejin Yeo"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "https://i.pinimg.com/236x/c3/6f/e3/c36fe3afef5e391baf3e95956b6ff5f1.jpg"
   bio              : "하나하나 해나가는 말하는🥔 ai 연구자 (Interested In Multi-modal)"
   location         : "Incheon, South Korea"
   email            : 
@@ -307,5 +307,9 @@ defaults:
       share: true
       related: true
       show_date: true
+      toc: true
+      toc_sticky: true
+      toc_label: Contents
+      toc_icon: "fas fa-stream"
 
 date_format: "%Y-%m-%d"
