@@ -18,5 +18,5 @@ tag:
 ![yeinyeo-donut]({{site.url}}/images/2024-08-13-donut local execution/yejinyeo-donut.png)
 
 #### 1.2. 복사한 repository를 local에 clone하기
-
+[[clone: repository를 내 컴퓨터(local)로 복제하기]](https://yejinyeo.github.io/git&github/clone/)를 참고해서 clone을 하고, vscode에 open한다.
 
