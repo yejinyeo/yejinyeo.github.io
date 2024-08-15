@@ -55,3 +55,36 @@ conda create -n myenv
 ```
 
 #### 2. 가상환경 활성화하기
+파이썬 패키지 설치하기 전에 꼭 가상환경을 활성화를 해야한다. 만약 활성화를 하지 않은 채로 패키지를 설치한다면 내가 프로젝트를 위해 생성한 가상환경 공간이 아닌 `(base)`에 패키지가 설치된다. 그러니 이 단계를 까먹지 말자!
+```
+conda activate [가상환경 이름]
+```
+가상환경을 활성화하면 `(base)`가 `([가상환경 이름])`으로 바뀐 것을 확인할 수 있다.
+![]({{site.url}}/images/2024-08-13-donut local execution/base to myenv.png)
+
+#### 3. 패키지 설치하기
+- 특정 패키지 설치
+```
+pip install [패키지 이름]
+```
+- 특정 버전의 패키지 설치
+```
+pip install [패키지 이름]==[버전]
+```
+- `requirements.txt` 파일을 통한 패키지 설치
+```
+pip install -r requirements.txt
+```
+- `setup.py`를 통한 패키지 설치
+```
+pip install .
+```
+
+#### 4. vscode에서 가상환경 적용하기
+##### 1) `Python:Select interpreter` 실행하기
+- vscode에서 프로젝트 폴더를 open한 다음 `ctrl+shift+p`를 누르고 `Python:Select interpreter`를 검색해 클릭한다.
+- vscode창에서 아래 그림과 같이 오른쪽 아래를 누르는 방법도 있다!
+![]({{site.url}}/images/2024-08-14-Virtual Environments/오른쪽 아래.png)
+
+##### 2) 생성한 가상환경 선택하기
+![]({{site.url}}/images/2024-08-14-Virtual Environments/vscode-myenv.png)
