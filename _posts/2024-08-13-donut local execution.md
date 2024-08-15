@@ -1,5 +1,5 @@
 ---
-title:  "1.Donut model 로컬 실행(local execution)"
+title:  "1.Donut model 로컬에서 실행하기(local execution)"
 categories: 
   - 학부연구생
 tag:
@@ -42,7 +42,8 @@ conda activate donut_official
 ```
 pip install .
 ```
-##### 2.5. vscode에서 가상환경 적용하기
+#### 3. vscode에서 가상환경 적용하기
 ![]({{site.url}}/images/2024-08-14-Virtual Environments/vscode-myenv.png)
 
 
+## 
