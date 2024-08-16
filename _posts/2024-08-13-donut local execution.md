@@ -46,4 +46,31 @@ pip install .
 ![]({{site.url}}/images/2024-08-14-Virtual Environments/vscode-myenv.png)
 
 
-## 
+## Getting Started
+#### 프로젝트 폴더 확인하기
+- `misc`: README.md에 첨부된 이미지, 데모에 쓸 수 있는 샘플 이미지가 저장되어 있는 디렉토리
+- `app.py`: Donut 모델을 간편하게 테스트할 수 있는 데모 파일이다. 모델이 어떻게 작동하는지 확인할 수 있다.
+
+#### `app.py` 돌려보기
+Donut 모델을 돌리기 위해 어떻게 해야하는지 너무 막막해서, 우선 `app.py`파일부터  코드를 분석하고 실행시켜보기로 했다.
+##### 1) 주요 코드 분석
+![]({{site.url}}/images/2024-08-13-donut local execution/app-주석.png)
+##### 2) `app.py` 실행
+vscode 상단 메뉴에서 `Terminal`-`New Terminal`를 누른 후, 아래에 띄어진 터미널 창에서 `Command Prompt`를 클릭하여 해당 프롬포트에서 실행하면 된다.
+![]({{site.url}}/images/2024-08-13-donut local execution/command-prompt.png){: .img-width-half .align-center}
+- Document Parsing task를 하기 위해 `CORD` dataset과 hugging face의 `donut-base-finetuned-cord-v2` trained model을 사용했다. 
+```
+python app.py --task cord --pretrained_path "naver-clova-ix/donut-base-finetuned-cord-v2"
+```
+- error 발생) `ModuleNotFoundError: No module named 'gradio'`가 발생하여, `gradio`를 설치하고 다시 실행시켰다.
+```
+pip install gradio
+```
+- error 발생) Donut model 로드 과정에서 모델이 사전 학습된 가중치를 로드할 때, 가중치 크기와 현재 모델의 구조 사이에 불일치로 인해 오류가 발생했다. `app.py` 파일의 코드를 다음과 같이 수정했다.
+```
+pretrained_model = DonutModel.from_pretrained(args.pretrained_path, ignore_mismatched_sizes=True)
+```
+- 다시 실행했을 때 local url이 뜨면 잘 작동한 것이다. local url을 복사하여 chrome에 접속하여 `misc`에 있는 샘플 영수증 이미지를 업로드했다. 그런데 결과가 error가 떴다. 이는 docvqa로 진행해도 동일한 error가 발생했다. `ignore_mismatched_sizes=True` 설정과 관련된 문제에서 비롯된 것 같다. 우선 해당 오류는 일단은 그냥 넘어가기로 했다.
+
+![]({{site.url}}/images/2024-08-13-donut local execution/local-url.png){: .img-width-half .align-center}
+![]({{site.url}}\images\2024-08-13-donut local execution\gradio-cord.png){: .img-width-half .align-center}
