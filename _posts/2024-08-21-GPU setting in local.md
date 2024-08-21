@@ -29,7 +29,7 @@ print(device)
 - 디스플레이 어댑터를 클릭하면 시스템에 설치된 그래픽 카드 목록이 다음과 같이 표시된다. 해당 화면을 보면 "NVIDIA GeForce MX450"이 있기 때문에 노트북에 NVIDIA GPU가 장착되어 있다는 것을 알 수 있다. 정확히는  "NVIDIA GeForce MX450"이라는 모델이 설치되어 있다.
 ![]({{site.url}}/images/2024-08-21-GPU setting in local/confirm_gpu.png)
 
-## 2. NVIDIA 드라이버 설치하기
+#### 2. NVIDIA 드라이버 설치하기
 - [NVIDIA 드라이버 download](https://www.nvidia.com/ko-kr/drivers/) 링크로 들어가서 앞서 확인한 내 GPU 정보와 운영체제를 입력하고 찾기 버튼을 누른 후, 설치를 진행하면 된다. (아래 첨부 그림은 `NVIDIA GeForce MX450` 기준으로 작성했다.)
 - 내 windows 운영체제 버전 확인하는 방법: **설정 > 시스템 > 정보** 들어가서 장치 사양과 windows 사양을 확인하면 현재 사용하고 있는 윈도우 버전 및 비트 등을 알 수 있다.
 ![]({{site.url}}/images/2024-08-21-GPU setting in local/driver.png){: .align-center}
