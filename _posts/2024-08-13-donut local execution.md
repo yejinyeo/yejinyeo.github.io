@@ -46,7 +46,7 @@ pip install .
 ![]({{site.url}}/images/2024-08-14-Virtual Environments/vscode-myenv.png)
 
 
-## Getting start
+## Getting started
 #### 프로젝트 폴더 확인하기
 - `misc`directory: README.md에 첨부된 이미지, 데모에 쓸 수 있는 샘플 이미지가 저장되어 있는 디렉토리
 - `app.py`: Donut 모델을 간편하게 테스트할 수 있는 데모 파일이다. 모델이 어떻게 작동하는지 확인할 수 있다.
@@ -92,3 +92,60 @@ pretrained_model = DonutModel.from_pretrained(args.pretrained_path, ignore_misma
 
 이외의 변수들에 대한 설명은 다음과 같다.
 ![]({{site.url}}/images/2024-08-13-donut local execution/config_cord.png)
+
+
+## Train
+본격적으로 모델을 학습시키기 위해서는 `train.py` 파일을 실행시키면 된다. 이 파일은 Donut model을 특정 dataset으로 학습시키는 코드를 담고 있다. PyTorch Lightning을 사용해서 모델을 훈련시키고, 학습 중 다양한 설정과 체크포인트 관리, 로그 기록을 수행한다.
+#### `train.py` 실행시키기
+- `README.md`의 Train 파트를 참고하여 진행했다.
+- `train.py` 스크립트를 사용해 CORD dataset에서 Donut model을 훈련시킬 것이다.
+
+vscode의 terminal(cmd)에서 다음과 같이 명령어를 입력한다.
+```python
+python train.py --config ./config/train_cord.yaml --exp_version "test_experiment"
+```
+`--config` 뒤에 경로는 config directory에 있는 원하는 task에 맞는 `.yaml` 파일 경로로 설정해주면 된다. CORD dataset으로 학습시키려고 하기 때문에 해당 dataset에 맞는 `.yaml` 파일 경로를 입력했다. 추가로 `--exp_version` 옵션을 통해 학습 버전을 지정할 수 있다. 지정하지 않으면 현재 날짜와 시간이 버전으로 사용된다.
+
+#### 오류 해결하기
+##### problem 1. ModuleNotFoundError
+
+**오류 메시지**  
+- tensorboard와 tensorboardX 패키지 설치되지 않아서 발생한 문제였다.
+```
+ModuleNotFoundError: Neither `tensorboard` nor `tensorboardX` is available. Try `pip install`ing either.
+DistributionNotFound: The 'tensorboardX' distribution was not found and is required by the application. HINT: Try running `pip install -U 'tensorboardX'`
+DistributionNotFound: The 'tensorboard' distribution was not found and is required by the application. HINT: Try running `pip install -U 'tensorboard'`
+```
+
+**solution**  
+- tensorboard와 tensorboardX 패키지 설치하기
+```python
+pip install tensorboard tensorboardX
+```
+
+##### problem 2. lightning_fabric.utilities.exceptions.MisconfigurationException
+이 오류는 GPU 설정 관련 오류였다. 논문의 실험은 NVIDIA A100 GPU를 사용하여 실행했다고 github에 언급되어 있지만, A100 GPU를 개인 노트북에서 사용하는 것은 사실상 불가능하기 때문에 실험과 동일한 조건으로 훈련을 진행할 수 없다.
+
+**오류 메시지**
+- `Trainer` class에서 `devices=0`으로 설정되어 있다고 나타났다. 이는 GPU를 사용하려고 하지만, `devices=0`으로 설정되어 있어서 GPU를 사용할 수 없다는 의미이다.
+```
+lightning_fabric.utilities.exceptions.MisconfigurationException: `Trainer(devices=0)` value is not a valid input using gpu accelerator.
+```
+- `devices` 변수는 `Trainer` class에서 모델을 학습시킬 때 사용할 GPU 또는 CPU의 개수를 지정한다. 
+
+**solution**
+1. GPU 확인하기
+- 내 노트북에 NVIDIA GPU가 장착되어 있는지 확인한다.  
+- 확인 방법: 장치 관리자 열기 > 디스플레이 어댑터 클릭하기 > NVIDIA GPU가 목록에 있는지 확인하기
+- 디스플레이 어댑터를 클릭하면 시스템에 설치된 그래픽 카드 목록이 다음과 같이 표시된다. 해당 화면을 보면 "NVIDIA GeForce MX450"이 있기 때문에 노트북에 NVIDIA GPU가 장착되어 있다는 것을 알 수 있다. 정확히는  "NVIDIA GeForce MX450"이라는 모델이 설치되어 있다.
+![]({{site.url}}/images/2024-08-13-donut local execution/gpu.png){: .align-center}
+- sol 1) GPU 사용이 가능한지 확인하기  
+terminal에 `python` 입력 후 아래 코드를 입력하여, True, False 여부를 확인한다. True가 출력되면 pytorch에서 GPU가 정상적으로 인식되고 있는 것이다.
+```python
+import torch
+print(torch.cuda.is_available())
+```
+나는 False가 나왔다...
+- sol 2)
+- sol) `train.py` 파일 수정: `Trainer` class에서 `devices` 변수값 설정하기
+`train.py` 파일에서 `trainer` 객체의 `devices` 인자 값을 설정해주면 된다. (`Trainer`는 Pytorch Lightning에서 제공하는 class이고, `trainer`는 이 class의 객체인 것임.)
