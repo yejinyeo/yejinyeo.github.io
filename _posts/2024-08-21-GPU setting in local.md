@@ -103,3 +103,10 @@ nvcc -V
 - 압축 해제한 cuDNN 폴더 내 `bin`, `include`, `lib` 디렉토리들을 복사해서 Cuda Toolkit 폴더(앞서 언급했던 Cuda Toolkit 경로: `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v버전`) 안에 붙여넣기한다. 동일한 폴더 이름이 있더라도 폴더 내 파일이 다르기 때문에 같은 이름의 폴더 안으로 파일들이 들어가니 신경 안써도 된다. (그냥 복붙하면 됨!)
 ![]({{site.url}}/images/2024-08-21-GPU setting in local/cuda toolkit.png)
 - 복붙하는 이유: cuDNN의 파일들을 CUDA 파일들과 함께 보관함으로써, 환경변수를 통해 CUDA를 불러올 때 cuDNN의 파일을 같이 불러올 수 있게 하기 위함이다.
+
+
+#### 6. 환경변수 확인하기
+- 마지막으로 CUDA를 활용하기 위해 PATH를 확인하면 된다. CUDA 설치 시 기본적으로 windows의 환경 변수(PATH)에 등록이 되지만, 확인을 위해 아래 과정을 진행한다.
+- 환경변수 확인하는 방법: **`고급 시스템 설정 보기` 시작창에 입력 후 열기 > 하단의 `환경 변수` 버튼 클릭하기
+- 아래와 같이 `CUDA_PATH`와 `CUDA_PATH_V버전` 이렇게 두 개가 뜨면 정상이다.
+![]({{site.url}}/images/2024-08-21-GPU setting in local/env var.png)
