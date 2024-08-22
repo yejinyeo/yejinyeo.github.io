@@ -134,6 +134,7 @@ lightning_fabric.utilities.exceptions.MisconfigurationException: `Trainer(device
 - `devices` 변수는 `Trainer` class에서 모델을 학습시킬 때 사용할 GPU 또는 CPU의 개수를 지정한다. 
 
 **solution**
+[[로컬에서 딥러닝을 위한 GPU 개발환경 구축하기]](https://yejinyeo.github.io/deep-learning/GPU-setting-in-local/)에서 설명하는 과정을 따라하면 된다.
 1. GPU 확인하기
 - 내 노트북에 NVIDIA GPU가 장착되어 있는지 확인한다.  
 - 확인 방법: 장치 관리자 열기 > 디스플레이 어댑터 클릭하기 > NVIDIA GPU가 목록에 있는지 확인하기
