@@ -139,3 +139,11 @@ import torch
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
 ```
+
+
+## Reference
+- [해도해도 안 돼서 빡치면 보세요!
+내 로컬 VS code 에서 torch.device Cuda 사용하는 방법.](https://kenkyuanime.com/vscode%EB%A1%9Cgpu%EC%82%AC%EC%9A%A9/)
+- [Windows 11에 GPU를 활용한 딥러닝 환경 구축
+](https://blog.naver.com/lovemema/223375784627)
+- [[ML][Windows 11] CUDA, cuDNN 설치](https://lonaru-burnout.tistory.com/16)
