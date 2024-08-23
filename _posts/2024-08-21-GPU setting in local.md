@@ -58,6 +58,11 @@ nvidia-smi
 - 표 보는 방법: 연두색 칸에서 나의 compute capability가 해당되는 행의 `CUDA SDK Version(s)` 열 값이 모두 호환되는 CUDA version이다. 예를 들어 compute capability가 7.5이면 10.0~12.5 까지의 CUDA SDK version을 사용할 수 있는 것이다.
 ![]({{site.url}}/images/2024-08-21-GPU setting in local/cuda version.png)
 
+**3) PyTorch 설치 버전 확인하기**
+- [PyTorch 설치를 위한 Command code 확인하기](https://pytorch.org/get-started/locally/)
+- 위 링크로 들어가 `Compute Platform` 파트에 있는 CUDA 버전을 확인해야 한다. 왜냐하면 이것을 확인하지 않고 이후 단계에서 무턱대고 CUDA 최신 버전 프로그램을 설치 했다가는 설치 지옥에 빠질 수 있기 때문이다. 그러므로 이후 CUDA를 설치할 때는 꼭 PyTorch에서 이 버전을 확인 후 그에 맞는 프로그램을 설치해야 한다.
+
+
 ##### 3.2 Cuda Toolkit 설치하기
 - [Cuda Toolkit 설치하러가기](https://developer.nvidia.com/cuda-toolkit-archive)
 - 위 링크로 들어가서 앞서 찾은 version에 해당하는 Cuda Toolkit을 설치하면 된다. (https://developer.nvidia.com/cuda-downloads 이 링크로 접속 시, 현 상황에 맞는 버전으로 자동으로 연결된다고 한다! ~~확실치는 않지만 나 같은 경우는 최신 버전인 12.6의 compute capability를 몰라서 12.5와 12.6을 고민하다가 이 링크로 들어가 12.6으로 설치를 진행했다.~~)
@@ -110,3 +115,27 @@ nvcc -V
 - 환경변수 확인하는 방법: **`고급 시스템 설정 보기` 시작창에 입력 후 열기 > 하단의 `환경 변수` 버튼 클릭하기
 - 아래와 같이 `CUDA_PATH`와 `CUDA_PATH_V버전` 이렇게 두 개가 뜨면 정상이다.
 ![]({{site.url}}/images/2024-08-21-GPU setting in local/env var.png)
+
+
+#### 7. Pytorch 설치하기
+anaconda prompt에서 가상환경 생성 및 활성화를 한 상태를 전제로 한다. vscode에도 가상환경이 적용되어 있어야 한다.
+([[가상환경(Virtual Environments)]](https://yejinyeo.github.io/python/Virtual-Environments/) 참고하기)
+- 사실 Cuda Toolkit 설치하기 전에 Pytorch 설치 버전을 먼저 확인했어야 했다..ㅠㅠ
+- [PyTorch 설치를 위한 Command code 확인하기](https://pytorch.org/get-started/locally/)
+- 위 링크로 들어가서 아래 그림과 같이 본인에게 맞는 선택을 한 후 `Run this Command`에 있는 코드를 복사하여 cmd창에 입력해 실행시키면 된다.
+![]({{site.url}}/images/2024-08-21-GPU setting in local/setting.png)
+- `PyTorch Build`: `Stable` 선택하기
+- `Package`: anaconda가 설치되어 있다면 `conda`를 선택하면 된다. conda가 아닌 python의 even을 통해 가상환경을 설정했으면 `pip`를 선택하면 된다.
+- `Compute Platform`: Cuda Toolkit 설치하기 전에 Pytorch 설치 버전을 먼저 확인했어야 하는 이유이다. 나는 CUDA 12.6을 설치했지만, 여기에는 12.6이 없다. 즉, CUDA 12.4를 다시 설치해야하는 것이다..
+
+
+## Now
+내 노트북에 탑재된 GPU는 내가 원하는 딥러닝 모델을 돌리기에는 어렵다고 한다. 애초에 노트북에 GPU가 있어도 단순한 딥러닝 모델만 돌릴 수 있지, 그 이상의 웬만한건 노트북으로는 돌리기 어렵다고 교수님께서 말씀해주셨다. (데스크탑이 필요한 이유..) 
+- 노트북으로는 로컬에서 딥러닝 모델을 돌리려는 무모한 시도는 하지 말자.
+- 그냥 Colab과 같이 서버 환경에서 진행하자..
+- 아직 내 로컬 환경에서 GPU가 되지 않는다. vscode에서 아래 코드가 아직도 "cpu"가 출력된다. CUDA 12.4를 설치해보던가, 아니면 포기하고 Colab에서 돌려보던가 해야할 것 같다.
+```python
+import torch
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
+```
