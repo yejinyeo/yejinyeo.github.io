@@ -88,3 +88,30 @@ pip install .
 
 ##### 2) 생성한 가상환경 선택하기
 ![]({{site.url}}/images/2024-08-14-Virtual Environments/vscode-myenv.png)
+
+
+#### 5. 가상환경 삭제하기
+vscode cmd에서 진행하지 않고, anaconda prompt에서 진행했다. (vscode cmd창에 `(가상환경 이름)`이 있더라도 anaconda prompt에서 삭제를 완료하면 자동으로 `(가상환경 이름)`이 사라지니 vscode의 터미널은 신경쓰지 않아도 된다!)
+- **가상 환경 목록 보기**: 아래 명령어는 현재 사용자가 생성한 모든 conda 가상환경을 나열하고, 각 환경의 위치를 표시해준다. `*` 기호는 현재 활성화된 가상환경을 의미한다.
+```
+conda info --envs
+```
+![]({{site.url}}/images/2024-08-14-Virtual Environments/list.png)
+위 명령어를 통해 삭제하려는 가상환경의 이름을 다시 한 번 확인하고 넘어가는 게 좋다.
+- **가상환경 비활성화하기**: 다음 명령어를 입력하면 `(가상환경 이름)`에서 `(base)`로 바뀐다.
+```
+conda deactivate
+```
+가상환경 삭제 전에 반드시 비활성화를 해야 하는 것은 아니다!(~~근데 나는 그냥 해주겠다..~~)
+- **가상환경 삭제하기**:
+```
+conda remove --name [가상 환경 이름] --all
+```
+위 명령어를 입력하면 실행 중에 `Proceed ([y]/n)?`가 뜬다. 이때 `y`를 입력하면 된다. 그 다음에 또 질문이 나온다면 `y`라고 답하면 된다.(다른 참고 자료에는 `Proceed ([y]/n)?`밖에 없었는데, 나는 아래와 같은 질문이 한 번 더 떴었다.)
+![]({{site.url}}/images/2024-08-14-Virtual Environments/ques-plus.png)
+- **가상환경 삭제됐는지 확인하기**: 아래 명령어를 입력해 가상환경가 삭제됐는지 확인하면 끝이다.
+```
+conda info --envs
+```
+아래 화면을 보면 가상환경이 삭제된 것을 확인할 수 있다.
+![]({{site.url}}/images/2024-08-14-Virtual Environments/end-list.png){: .img-width-half .align-center}
