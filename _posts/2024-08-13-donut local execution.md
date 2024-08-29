@@ -47,7 +47,7 @@ pip install .
 
 
 ## Getting started
-#### 프로젝트 폴더 확인하기
+#### 4. 프로젝트 폴더 확인하기
 - `misc`directory: README.md에 첨부된 이미지, 데모에 쓸 수 있는 샘플 이미지가 저장되어 있는 디렉토리
 - `app.py`: Donut 모델을 간편하게 테스트할 수 있는 데모 파일이다. 모델이 어떻게 작동하는지 확인할 수 있다.
 - `donut`directory: Donut 모델의 핵심 기능을 구현한 모듈로, 모델의 encdoer와 decoder를 정의하고, 데이터 전처리, 학습, 평가, 그리고 JSON 데이터 입출력 등 모델의 전반적인 동작을 지원하는 코드들을 포함하고 있다.
@@ -57,11 +57,11 @@ pip install .
 - `config` directory: Donut model 학습을 위한 다양한 설정 파일들(`.yaml`)을 포함하는 디렉토리이다.  이 파일들은 각 작업(CORD, DocVQA, RVL-CDIP, ZH Train Ticket)별로 학습에 필요한 매개변수와 옵션들을 정의하여, 모델 학습 시 해당 설정을 불러와 사용한다.
 - `config/train_cord.yaml`: CORD 데이터셋을 사용하여 Donut model을 학습할 때 필요한 다양한 설정을 정의한 파일이다. 데이터셋 로드, 학습률, 배치 크기, 입력 이미지 크기 등 학습에 필요한 다양한 매개변수를 포함하고 있고, 이 파일을 사용해 학습을 시작하면 지정된 설정에 따라 모델이 학습을 진행한다.
 
-#### `app.py` 돌려보기
+#### 5. `app.py` 돌려보기
 Donut 모델을 돌리기 위해 어떻게 해야하는지 너무 막막해서, 우선 `app.py`파일부터  코드를 분석하고 실행시켜보기로 했다.
-##### 1) 주요 코드 분석
+##### 5.1 주요 코드 분석
 ![]({{site.url}}/images/2024-08-13-donut local execution/app-주석.png)
-##### 2) `app.py` 실행
+##### 5.2 `app.py` 실행
 vscode 상단 메뉴에서 `Terminal`-`New Terminal`를 누른 후, 아래에 띄어진 터미널 창에서 `Command Prompt`를 클릭하여 해당 프롬포트에서 실행하면 된다.
 ![]({{site.url}}\images\2024-08-13-donut local execution\command-prompt.png){: .img-width-half .align-center}
 - Document Parsing task를 하기 위해 `CORD` dataset과 hugging face의 `donut-base-finetuned-cord-v2` trained model을 사용했다. 
@@ -81,7 +81,7 @@ pretrained_model = DonutModel.from_pretrained(args.pretrained_path, ignore_misma
 ![]({{site.url}}/images/2024-08-13-donut local execution/local-url.png){: .img-width-half .align-center}
 ![]({{site.url}}\images\2024-08-13-donut local execution\gradio-cord.png){: .img-width-half .align-center}
 
-#### `config` directory의 `.yaml` 파일 코드 분석하기
+#### 6. `config` directory의 `.yaml` 파일 코드 분석하기
 내가 돌려볼 task(document parsing, CORD dataset)에 해당하는 `config/train_cord.yaml` 파일을 살펴보겠다. 파일 안에서 모델 학습에 중요하거나 이해하는데 애매한 몇 가지 변수들만 설명하겠다.
 - `resume_from_checkpoint_path: null`: 이전에 중단된 체크포인트에서 학습을 재개할 경로를 지정한다. **체크포인트**란 모델 학습 중에 현재 상태를 저장한 시점을 의미한다. 현재는 `null`로 설정되어 있기 때문에 체크포인트에서 재개하지 않고 처음부터 학습을 시작한다. 다만, 해당 변수는  PyTorch Lightning(PL)의 체크포인트 재개 기능과 관련된 옵션으로, 다른 목적으로 사용되지 않는다. (~~이 변수는 딱히 중요한 변수는 아니다!~~)
 - `pretrained_model_name_or_path: "naver-clova-ix/donut-base"`: 사전 학습된 모델을 load할 경로 또는 이름을 지정한다. 여기서 [`"naver-clova-ix/donut-base"`](https://huggingface.co/naver-clova-ix/donut-base/tree/official)는 hugging face model hub에 있는 사전 학습된 Donut model을 의미한다. (`donut-proto`가 아닌 `donut-base`가 선택된 이유는 `donut-base`가 더 강력한 하드웨어와 더 큰 데이터셋을 사용하여 학습되었기 때문에, 일반적으로 더 좋은 성능을 제공할 가능성이 높음)
@@ -96,7 +96,7 @@ pretrained_model = DonutModel.from_pretrained(args.pretrained_path, ignore_misma
 
 ## Train
 본격적으로 모델을 학습시키기 위해서는 `train.py` 파일을 실행시키면 된다. 이 파일은 Donut model을 특정 dataset으로 학습시키는 코드를 담고 있다. PyTorch Lightning을 사용해서 모델을 훈련시키고, 학습 중 다양한 설정과 체크포인트 관리, 로그 기록을 수행한다.
-#### `train.py` 실행시키기
+#### 7. `train.py` 실행시키기
 - `README.md`의 Train 파트를 참고하여 진행했다.
 - `train.py` 스크립트를 사용해 CORD dataset에서 Donut model을 훈련시킬 것이다.
 
@@ -106,8 +106,8 @@ python train.py --config ./config/train_cord.yaml --exp_version "test_experiment
 ```
 `--config` 뒤에 경로는 config directory에 있는 원하는 task에 맞는 `.yaml` 파일 경로로 설정해주면 된다. CORD dataset으로 학습시키려고 하기 때문에 해당 dataset에 맞는 `.yaml` 파일 경로를 입력했다. 추가로 `--exp_version` 옵션을 통해 학습 버전을 지정할 수 있다. 지정하지 않으면 현재 날짜와 시간이 버전으로 사용된다.
 
-#### 오류 해결하기
-##### problem 1. ModuleNotFoundError
+#### 8. 오류 해결하기
+##### 8.1 problem 1: ModuleNotFoundError
 
 **오류 메시지**  
 - tensorboard와 tensorboardX 패키지 설치되지 않아서 발생한 문제였다.
@@ -123,7 +123,7 @@ DistributionNotFound: The 'tensorboard' distribution was not found and is requir
 pip install tensorboard tensorboardX
 ```
 
-##### problem 2. lightning_fabric.utilities.exceptions.MisconfigurationException
+##### 8.2 problem 2: lightning_fabric.utilities.exceptions.MisconfigurationException
 이 오류는 GPU 설정 관련 오류였다. 논문의 실험은 NVIDIA A100 GPU를 사용하여 실행했다고 github에 언급되어 있지만, A100 GPU를 개인 노트북에서 사용하는 것은 사실상 불가능하기 때문에 실험과 동일한 조건으로 훈련을 진행할 수 없다.
 
 **오류 메시지**
@@ -134,19 +134,8 @@ lightning_fabric.utilities.exceptions.MisconfigurationException: `Trainer(device
 - `devices` 변수는 `Trainer` class에서 모델을 학습시킬 때 사용할 GPU 또는 CPU의 개수를 지정한다. 
 
 **solution**
-[[로컬에서 딥러닝을 위한 GPU 개발환경 구축하기]](https://yejinyeo.github.io/deep-learning/GPU-setting-in-local/)에서 설명하는 과정을 따라하면 된다.
-1. GPU 확인하기
-- 내 노트북에 NVIDIA GPU가 장착되어 있는지 확인한다.  
-- 확인 방법: 장치 관리자 열기 > 디스플레이 어댑터 클릭하기 > NVIDIA GPU가 목록에 있는지 확인하기
-- 디스플레이 어댑터를 클릭하면 시스템에 설치된 그래픽 카드 목록이 다음과 같이 표시된다. 해당 화면을 보면 "NVIDIA GeForce MX450"이 있기 때문에 노트북에 NVIDIA GPU가 장착되어 있다는 것을 알 수 있다. 정확히는  "NVIDIA GeForce MX450"이라는 모델이 설치되어 있다.
-![]({{site.url}}/images/2024-08-13-donut local execution/gpu.png){: .align-center}
-- sol 1) GPU 사용이 가능한지 확인하기  
-terminal에 `python` 입력 후 아래 코드를 입력하여, True, False 여부를 확인한다. True가 출력되면 pytorch에서 GPU가 정상적으로 인식되고 있는 것이다.
-```python
-import torch
-print(torch.cuda.is_available())
-```
-나는 False가 나왔다...
-- sol 2)
-- sol) `train.py` 파일 수정: `Trainer` class에서 `devices` 변수값 설정하기
-`train.py` 파일에서 `trainer` 객체의 `devices` 인자 값을 설정해주면 된다. (`Trainer`는 Pytorch Lightning에서 제공하는 class이고, `trainer`는 이 class의 객체인 것임.)
+- [[로컬에서 딥러닝을 위한 GPU 개발환경 구축하기]](https://yejinyeo.github.io/deep-learning/GPU-setting-in-local/)에서 설명하는 과정을 따라하면 된다.
+- 그러나 로컬에서 모델을 돌리는 것은 GPU 문제로 불가능하다고 판단했다.
+
+## End
+노트북에서 논문의 모델을 돌려보려면 로컬이 아닌 colab에서 실행시켜야 한다는 것을 깨닫게 됐다. `.py` 파일도 colab에서 실행시킬 수 있기 때문에, colab에서 github와 연동하여 모델을 돌려봐야겠다.
