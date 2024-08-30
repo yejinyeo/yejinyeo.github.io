@@ -5,6 +5,7 @@ categories:
 tag:
   - donut
   - 가상환경
+  - project
 ---
 
 ## Introduction
@@ -107,35 +108,35 @@ python train.py --config ./config/train_cord.yaml --exp_version "test_experiment
 `--config` 뒤에 경로는 config directory에 있는 원하는 task에 맞는 `.yaml` 파일 경로로 설정해주면 된다. CORD dataset으로 학습시키려고 하기 때문에 해당 dataset에 맞는 `.yaml` 파일 경로를 입력했다. 추가로 `--exp_version` 옵션을 통해 학습 버전을 지정할 수 있다. 지정하지 않으면 현재 날짜와 시간이 버전으로 사용된다.
 
 #### 8. 오류 해결하기
-##### 8.1 problem 1: ModuleNotFoundError
+##### error 1: ModuleNotFoundError
 
-**오류 메시지**  
-- tensorboard와 tensorboardX 패키지 설치되지 않아서 발생한 문제였다.
+- **오류 메시지**  
+  - tensorboard와 tensorboardX 패키지 설치되지 않아서 발생한 문제였다.
 ```
 ModuleNotFoundError: Neither `tensorboard` nor `tensorboardX` is available. Try `pip install`ing either.
 DistributionNotFound: The 'tensorboardX' distribution was not found and is required by the application. HINT: Try running `pip install -U 'tensorboardX'`
 DistributionNotFound: The 'tensorboard' distribution was not found and is required by the application. HINT: Try running `pip install -U 'tensorboard'`
 ```
 
-**solution**  
-- tensorboard와 tensorboardX 패키지 설치하기
+- **solution**  
+  - tensorboard와 tensorboardX 패키지 설치하기
 ```python
 pip install tensorboard tensorboardX
 ```
 
-##### 8.2 problem 2: lightning_fabric.utilities.exceptions.MisconfigurationException
+##### error 2: lightning_fabric.utilities.exceptions.MisconfigurationException
 이 오류는 GPU 설정 관련 오류였다. 논문의 실험은 NVIDIA A100 GPU를 사용하여 실행했다고 github에 언급되어 있지만, A100 GPU를 개인 노트북에서 사용하는 것은 사실상 불가능하기 때문에 실험과 동일한 조건으로 훈련을 진행할 수 없다.
 
-**오류 메시지**
-- `Trainer` class에서 `devices=0`으로 설정되어 있다고 나타났다. 이는 GPU를 사용하려고 하지만, `devices=0`으로 설정되어 있어서 GPU를 사용할 수 없다는 의미이다.
+- **오류 메시지**
+  - `Trainer` class에서 `devices=0`으로 설정되어 있다고 나타났다. 이는 GPU를 사용하려고 하지만, `devices=0`으로 설정되어 있어서 GPU를 사용할 수 없다는 의미이다.
 ```
 lightning_fabric.utilities.exceptions.MisconfigurationException: `Trainer(devices=0)` value is not a valid input using gpu accelerator.
 ```
-- `devices` 변수는 `Trainer` class에서 모델을 학습시킬 때 사용할 GPU 또는 CPU의 개수를 지정한다. 
+  - `devices` 변수는 `Trainer` class에서 모델을 학습시킬 때 사용할 GPU 또는 CPU의 개수를 지정한다. 
 
-**solution**
-- [[로컬에서 딥러닝을 위한 GPU 개발환경 구축하기]](https://yejinyeo.github.io/deep-learning/GPU-setting-in-local/)에서 설명하는 과정을 따라하면 된다.
-- 그러나 로컬에서 모델을 돌리는 것은 GPU 문제로 불가능하다고 판단했다.
+- **solution**
+  - [[로컬에서 딥러닝을 위한 GPU 개발환경 구축하기]](https://yejinyeo.github.io/deep-learning/GPU-setting-in-local/)에서 설명하는 과정을 따라하면 된다.
+  - 그러나 로컬에서 모델을 돌리는 것은 GPU 문제로 불가능하다고 판단했다.
 
 ## End
 노트북에서 논문의 모델을 돌려보려면 로컬이 아닌 colab에서 실행시켜야 한다는 것을 깨닫게 됐다. `.py` 파일도 colab에서 실행시킬 수 있기 때문에, colab에서 github와 연동하여 모델을 돌려봐야겠다.
