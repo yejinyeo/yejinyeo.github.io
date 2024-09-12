@@ -107,7 +107,7 @@ document_qa(
 Colab 환경에서 오류 발생했을 때, 해결하기 위해 라이브러리를 설치해도 문제가 그대로라면 **런타임을 다시 시작**해보자!
 {: .notice--success}
 
-- **추론 결과**
+- **추론 결과**: [Transformers documentation: Pipelines](https://huggingface.co/docs/transformers/main/en/main_classes/pipelines)에서의 example 결과랑 동일함을 확인할 수 있다.
 ![]({{site.url}}/images/2024-09-02-transformers/sol.png)
 
 
